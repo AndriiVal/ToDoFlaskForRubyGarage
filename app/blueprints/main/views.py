@@ -10,7 +10,7 @@ import ast
 @main.route('/')
 @main.route('/index')
 def index():
-    proj = Projects.query.filter_by(user_id=0).all()
+    proj = Projects.query.filter_by(user_id='guest').all()
     task = Tasks.query.order_by(Tasks.task_position).all()
     if current_user.is_authenticated:
         proj = Projects.query.filter_by(user_id=current_user.id).all()
@@ -32,7 +32,7 @@ def add_project():
             db.session.commit()
             flash('Project added - {}'.format(request.form['name']))
         else:
-            proj = Projects(project_name=request.form['name'],user_id=0)
+            proj = Projects(project_name=request.form['name'],user_id='guest')
             db.session.add(proj)
             db.session.commit()
             flash('Project added - {}'.format(request.form['name']))        	
