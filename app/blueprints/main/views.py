@@ -10,7 +10,7 @@ import ast
 @main.route('/')
 @main.route('/index')
 def index():
-    proj = Projects.query.filter_by(user_name=0).all()
+    proj = Projects.query.filter_by(user_id=0).all()
     task = Tasks.query.order_by(Tasks.task_position).all()
     if current_user.is_authenticated:
         proj = Projects.query.filter_by(user_id=current_user.id).all()
