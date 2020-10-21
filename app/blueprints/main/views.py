@@ -97,23 +97,16 @@ def update_task(id):
     return redirect(url_for('main.index'))
 
 ################################################################### ADDITIONAL
-@main.route('/change_pos',methods=['GET','POST'])
-def change_pos():
-    project=ast.literal_eval(request.form['positions'])
-    print(project)
-    for t in project:
-        print(t[0])
-        print(t[1])
-    for p in project:
-        taskChange = Tasks.query.filter_by(id=p[0]).first()
-        taskChange.task_position = p[1]
-        db.session.commit()
-    return jsonify('success')
 
-@main.route('/task_done/<id>')
+@main.route('/task_done/<id>',methods=['GET','POST'])
 def task_done(id):
     taskDone = Tasks.query.get(id)
-    taskDone.task_status = True
+    if taskDone.task_status:
+        taskDone.task_status = False
+        flash('Task start')
+    else:
+        taskDone.task_status = True
+        flash('Task done')
     db.session.add(taskDone)
     db.session.commit()
     return redirect(url_for('main.index'))

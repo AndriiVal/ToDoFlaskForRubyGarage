@@ -4,7 +4,12 @@
 <div class="container">
   <div class="row">
     <div class="col md-12">
-
+      {% if current_user.is_anonymous %}
+        <div class="alert alert-warning alert-dismissable" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">x</span></button>
+            <span>You are a guest. All guests have access to each other's projects and tasks. Please log in or register to create personal projects with tasks</span>
+        </div>
+      {% endif %}
       <div class="jumbotron p-3">
         <div class="text-center">
           <button type="button"  class="btn btn-success" data-toggle="modal" data-target="#mymodal-pr">Add New Project</button><br>
@@ -32,9 +37,18 @@
             {% if ts.project_id == pr.id %}
               <tr>
                 <td>{{ts.id}}</td>
-                <td><div class="form-check">
-                      <input class="form-check-input position-static" type="checkbox" value="option1" aria-label="...">
-                    </div></td>
+                <td>{% if ts.task_status == False %}
+                      <form class="form" action="{{ url_for('main.task_done',id=ts.id) }}" method="POST">     
+                        <input type="hidden" value="{{ ts.id }}">
+                        <button type="submit">+</button>
+                      </form>
+                    {% else %}
+                      <form class="form" action="{{ url_for('main.task_done',id=ts.id) }}" method="POST">     
+                        <input type="hidden" value="{{ ts.id }}">
+                        <button type="submit">X</button>
+                      </form> 
+                    {% endif %}
+                </td>
                 <td>{{ts.task_name}}</td>
                 <td>{{ts.date}}</td>
                 <td>{{ts.task_priority}}</td>
