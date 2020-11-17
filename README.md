@@ -1,7 +1,7 @@
-ToDoFlaskForRubyGarage
+Todo List
 ==============================
-Test task ruby rails course: web app ToDo List for RubyGarag, using Python, Flask and Bootstrap
+Web app Todo List, using Python, Flask and Bootstrap
 
 Live Demo
 ----------
-[ToDo for RubyGarage](https://todo-for-test.herokuapp.com)
+[Todo List demo](https://todo-for-test.herokuapp.com)
