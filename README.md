@@ -2,7 +2,7 @@ Todo List
 ==============================
 Web app Todo List, using Python, Flask and Bootstrap
 
-![todo](./site.png)
+![todo](./todo.png)
 
 Live Demo
 ----------
